@@ -1,0 +1,6 @@
+# Need to fill in the values to connect to db
+# save file as cred.txt
+dbName="<db_name>"
+dbUser="<db_username>"
+dbDrowssap="<db_password>"
+dbHost="<db_host>"
