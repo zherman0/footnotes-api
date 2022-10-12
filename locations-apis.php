@@ -82,7 +82,7 @@ function location_update()
 }
 
 # matches GET /locationearch/<some_params>
-dispatch('/locationearch/**', 'location_search');
+dispatch('/locationsearch/**', 'location_search');
 function location_search()
 {
     if (params(0)) {
