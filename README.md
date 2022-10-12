@@ -63,8 +63,8 @@ HIKES
 
       Alias /fnapi/ /var/www/html/fn/
 
-      <Directory "/var/www/html/fn/">
-      Options Indexes FollowSymLinks Includes ExecCGI
-      AllowOverride All
-      Require all granted
-      </Directory>
+      > <Directory "/var/www/html/fn/"><br/>
+      > Options Indexes FollowSymLinks Includes ExecCGI<br/>
+      > AllowOverride All<br/>
+      > Require all granted<br/>
+      > <\/Directory>
