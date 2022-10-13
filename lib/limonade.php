@@ -1505,7 +1505,6 @@ function html($content_or_func, $layout = '', $locals = array())
   send_header('Content-Type: text/html; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  send_header('Accept:*/*');
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1536,7 +1535,7 @@ function xml($data)
   send_header('Content-Type: text/xml; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  send_header('Accept:*/*');
+  
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1554,7 +1553,7 @@ function css($content_or_func, $layout = '', $locals = array())
   send_header('Content-Type: text/css; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  send_header('Accept:*/*');
+  
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1572,7 +1571,7 @@ function js($content_or_func, $layout = '', $locals = array())
   send_header('Content-Type: application/javascript; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  send_header('Accept:*/*');
+  
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1590,7 +1589,7 @@ function txt($content_or_func, $layout = '', $locals = array())
   send_header('Content-Type: text/plain; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  send_header('Accept:*/*');
+  
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1609,7 +1608,7 @@ function json($data, $json_option = 0)
   send_header('Content-Type: application/json; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  send_header('Accept:*/*');
+  
   return version_compare(PHP_VERSION, '5.3.0', '>=') ? json_encode($data, $json_option) : json_encode($data);
 }
 
