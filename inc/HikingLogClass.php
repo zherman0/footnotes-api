@@ -56,7 +56,7 @@ public function getHikes($_id=null, $_arg = null)
 function saveHike($_data, $_id = null)
 {
 	$_tbl = $this->getHikeLogTable();
-	if ($this->UserAllowed) {
+	if (!$this->UserAllowed) {
 		return "ERROR: Unable to confirm authorization";
 	}
 	if ($_id == null) {

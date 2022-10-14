@@ -76,7 +76,7 @@ function getWhereClause($_arg)
 function saveUser($_data, $_id = null)
 {
 	$_tbl = $this->getUserTable();
-	if ($this->UserAllowed) {
+	if (!$this->UserAllowed) {
 		return "ERROR: Unable to confirm authorization";
 	}
 	if ($_id == null) {

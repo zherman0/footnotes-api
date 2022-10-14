@@ -35,7 +35,7 @@ function get_location()
 }
 
 # matches OPTIONS /location/1
-//dispatch_options('/location/:id', 'get_options_location');
+dispatch_options('/location/:id', 'get_options_location');
 function get_options_location()
 {
     if (params('id')) {

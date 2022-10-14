@@ -96,7 +96,7 @@ function unregister_globals()
 
 if(ini_get('register_globals'))
 {
-  unregister_globals( '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', 
+  unregister_globals( '_POST','_PUT', '_GET', '_COOKIE', '_REQUEST', '_SERVER', 
                       '_ENV', '_FILES');
   ini_set('register_globals', 0);
 }
@@ -119,6 +119,7 @@ if (get_magic_quotes_gpc())
 {
   $_GET    = remove_magic_quotes($_GET);
   $_POST   = remove_magic_quotes($_POST);
+  $_PUT   = remove_magic_quotes($_PUT);
   $_COOKIE = remove_magic_quotes($_COOKIE);
   ini_set('magic_quotes_gpc', 0);
 }
@@ -1001,7 +1002,7 @@ function request_is_patch($env = null)
  */
 function request_methods()
 {
-  return array("GET","POST","PUT","DELETE","HEAD","PATCH");
+  return array("GET","POST","PUT","DELETE","HEAD","PATCH","OPTIONS");
 }
 
 /**
@@ -1193,6 +1194,18 @@ function dispatch_patch($path_or_array, $callback, $options = array())
   route("PATCH", $path_or_array, $callback, $options);
 }
 
+/**
+ * Add an OPTIONS route
+ *
+ * @param string $path_or_array
+ * @param string $callback
+ * @param array $options (optional). See {@link route()} for available options.
+ * @return void
+ */
+function dispatch_options($path_or_array, $callback, $options = array())
+{
+  route("OPTIONS", $path_or_array, $callback, $options);
+}
 
 /**
  * Add route if required params are provided.
@@ -1505,6 +1518,7 @@ function html($content_or_func, $layout = '', $locals = array())
   send_header('Content-Type: text/html; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
+  send_header('Accept:*/*');
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1535,7 +1549,6 @@ function xml($data)
   send_header('Content-Type: text/xml; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1553,7 +1566,6 @@ function css($content_or_func, $layout = '', $locals = array())
   send_header('Content-Type: text/css; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1571,7 +1583,6 @@ function js($content_or_func, $layout = '', $locals = array())
   send_header('Content-Type: application/javascript; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1589,7 +1600,6 @@ function txt($content_or_func, $layout = '', $locals = array())
   send_header('Content-Type: text/plain; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1608,7 +1618,6 @@ function json($data, $json_option = 0)
   send_header('Content-Type: application/json; charset='.strtolower(option('encoding')));
   send_header('Access-Control-Allow-Origin: *');
   send_header('Access-Control-Allow-Methods: *');
-  
   return version_compare(PHP_VERSION, '5.3.0', '>=') ? json_encode($data, $json_option) : json_encode($data);
 }
 
