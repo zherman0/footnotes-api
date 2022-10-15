@@ -60,25 +60,22 @@ function user_search()
 }
 
 # matches OPTIONS /user/1
-//dispatch_options('/user/:id', 'get_options_user');
+dispatch_options('/user/:id', 'get_options_user');
 function get_options_user()
 {
-    if (params('id')) {
-        return html("OK");
-    } else {
-        halt(NOT_FOUND, "This options doesn't exists"); # raises error / renders an error page
-    }
+    return html("OK");
+   
 }
-
  # matches POST /user
  dispatch_post('/user', 'user_create');
  function user_create()
  {
      $api = new UserClass;
+    
      if (array_key_exists('userId', $_POST)) {
         $results = $api->saveUser($_POST, $_POST['userId']);    
      } else {
-        $results = $api->saveUser($_POST);    
+        $results = $api->saveUser($_POST);  
      }
      set('user', $results);
      if ($results) {

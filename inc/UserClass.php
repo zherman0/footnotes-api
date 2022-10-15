@@ -31,7 +31,7 @@ function getUserTable()
 
 public function getUsers($_id=null, $_arg = null)
 {
-    $query = "SELECT tbl.userId, tbl.username, tbl.fullname, tbl.email FROM user tbl";
+    $query = "SELECT tbl.userId, tbl.username, tbl.fullname, tbl.email, tbl.status FROM user tbl";
     if (($_id == null) && ($_arg == null)) {
        $query .= " ORDER BY userId";
        $stmt = $this->DBconn->prepare($query);
@@ -75,6 +75,7 @@ function getWhereClause($_arg)
 
 function saveUser($_data, $_id = null)
 {
+
 	$_tbl = $this->getUserTable();
 	if (!$this->UserAllowed) {
 		return "ERROR: Unable to confirm authorization";
@@ -84,9 +85,9 @@ function saveUser($_data, $_id = null)
 	} else {
 		$action = "UPDATE ";
 	}
-
 	if (($_data["username"] != NULL) && ($_data["fullname"] != NULL) && ($_data["email"] != NULL) )  // at least the name/desc must be set
 	{
+		// return html("Testing stmt");
 		$sql_update = "$action $_tbl SET fullname = ?, username = ?, status = ?, email = ?";
 		if ($_id != null) {
 			$sql_update .= " WHERE userId=$_id";
