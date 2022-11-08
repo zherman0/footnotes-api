@@ -12,7 +12,7 @@ USERS
 - GET /user/1 - get a specific user with ID of 1
 - POST /user - add new user
 - PUT /user/1 - update user 1
-- GET /serachuser/username/jsmith - search any column (userId, username, fullname, status, email) in the user table
+- GET /searchuser/username/jsmith - search any column (userId, username, fullname, status, email) in the user table
 
 > _Example usage_
 >
@@ -52,7 +52,7 @@ HIKES
 
 1. Install some XAMP stack with apache, PHP 7.4.x, mariaDB
 2. On mariaDB, create a database called 'footnotes-db'. Deploy the /inc/footnotes.sql file on your 'footnotes-db' database.
-3. Clone this repo into your working html directoy such as /var/www/html/
+3. Clone this repo into your working html directory such as /var/www/html/
 4. Using the /inc/cred.sample.txt file, make your own cred.txt file in the /inc directory and fill out the db information such as user, password, host, and db name.
 5. With your server running, you should be able to type the following in your web browser and see some results:
 
