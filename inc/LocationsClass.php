@@ -56,7 +56,7 @@ class LocationsClass extends DataBaseMysqli
         foreach ($_arg as $key => $value) {
             $where[] = "$key = ?";
             $params[] = $value;
-            if (in_array($key, ["name", "description", "directions", "status"], "last_updated"))
+            if (in_array($key, ["name", "description", "directions", "status", "last_updated"]))
                 $bind .= "s";
             else if (in_array($key, ["locationId"]))
                 $bind .= "i";
