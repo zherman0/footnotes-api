@@ -1,0 +1,12 @@
+# Use the official MariaDB image as the base
+FROM mariadb:latest
+
+# Set the root password
+ENV MYSQL_ROOT_PASSWORD work4fun
+
+# Copy the local config file to the container
+COPY inc/footnotes-db.sql /docker-entrypoint-initdb.d/
+
+# Expose the default MySQL port (3306)
+EXPOSE 3306
+

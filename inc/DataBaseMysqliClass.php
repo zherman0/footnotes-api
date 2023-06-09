@@ -38,8 +38,8 @@ class DataBaseMysqli
             $this->DBname = $cred["dbName"]; //db name
             $this->DBuser = $cred["dbUser"]; //db user id 
             $this->DBpass = $cred["dbDrowssap"]; //password
-            $this->DBhost = "localhost";
-         }
+            $this->DBhost = $cred["dbHost"];
+        }
     }
 
     //=======================================
@@ -117,7 +117,7 @@ class DataBaseMysqli
     // Return Type: none
     // Description: executes sql statement
     //==========================================
-    public function query($sql, $dataType = MYSQLI_ASSOC )
+    public function query($sql, $dataType = MYSQLI_ASSOC)
     {
 
         if (!$this->DBconn) {
@@ -180,7 +180,7 @@ class DataBaseMysqli
         //     $output .= '({"total":"0", "results":""})';
         // }
         return $jsonresult;
-//    return $output;
+        //    return $output;
 
     } // end jsonQuery
 
@@ -196,9 +196,9 @@ class DataBaseMysqli
         return $this->DBdata;
     } // end dbGetResults
 
-//-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
-//==========================================================================
+    //==========================================================================
     // Function:    dbGetTableData
     // Parameters:  table
     // Return Type: array with table info
@@ -226,19 +226,18 @@ class DataBaseMysqli
     {
         return $this->numOfFields;
     }
-    
+
     public function fetchAssocResults($stmt)
     {
-        if($stmt->num_rows>0)
-        {
+        if ($stmt->num_rows > 0) {
             $result = array();
             $md = $stmt->result_metadata();
             $params = array();
-            while($field = $md->fetch_field()) {
+            while ($field = $md->fetch_field()) {
                 $params[] = &$result[$field->name];
             }
             call_user_func_array(array($stmt, 'bind_result'), $params);
-            if($stmt->fetch())
+            if ($stmt->fetch())
                 return $result;
         }
         return null;
@@ -247,12 +246,10 @@ class DataBaseMysqli
     public function getPreparedResults($stmt)
     {
         $results = array();
-        if($stmt)
-        {
+        if ($stmt) {
             $stmt->execute();
             $stmt->store_result();
-            while($assoc_array = $this->fetchAssocResults($stmt))
-            {
+            while ($assoc_array = $this->fetchAssocResults($stmt)) {
                 $results[] = $assoc_array;
             }
             $stmt->close();
