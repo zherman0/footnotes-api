@@ -1,0 +1,14 @@
+# Use the official PHP 7.4 image as the base
+FROM php:7.4-apache
+
+# Set the working directory inside the container
+WORKDIR /var/www/html
+
+# Copy all the code from the current directory to the container
+COPY index.html /var/www/html/
+COPY . /var/www/html/fnapi/
+
+# Expose port 80 (assuming your PHP application runs on port 80)
+EXPOSE 80
+
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli

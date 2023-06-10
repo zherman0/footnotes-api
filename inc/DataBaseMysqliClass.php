@@ -38,7 +38,7 @@ class DataBaseMysqli
             $this->DBname = $cred["dbName"]; //db name
             $this->DBuser = $cred["dbUser"]; //db user id 
             $this->DBpass = $cred["dbDrowssap"]; //password
-            $this->DBhost = $cred["dbHost"];
+            $this->DBhost = isset($_ENV['FOOTNOTES_DB_SERVICE_SERVICE_HOST']) ? $_ENV['FOOTNOTES_DB_SERVICE_SERVICE_HOST'] : $cred["dbHost"];
         }
     }
 
