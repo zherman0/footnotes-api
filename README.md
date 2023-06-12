@@ -77,12 +77,12 @@ HIKES
    `git clone https://github.com/zherman0/footnotes-api.git`
 2. Using the /inc/cred.sample.txt file, make your own cred.txt file in the /inc directory and fill out the db information such as user, password, host, and db name. Make sure to set the dbhost to the appropriate value.
 3. Build dockerfiles<br/>
-   `docker build -f Dockerfile.db -t footnotes-database .`
+   `docker build -f Dockerfile.db -t footnotes-database .`<br/>
    `docker build -f Dockerfile.api -t footnotes-api .`
 4. Set a network<br/>
    `docker network create fn-network`
 5. Deploy your images to containers<br/>
-   `docker run -d --name footnotes-db --network fn-network -e MYSQL_ROOT_PASSWORD=<your_password> footnotes-database`
+   `docker run -d --name footnotes-db --network fn-network -e MYSQL_ROOT_PASSWORD=<your_password> footnotes-database`<br/>
    `docker run -d --name fn-api --network fn-network -p 80:80 footnotes-api`
 6. Test that the api and db are working together<br/>
    `(In browser) 127.0.0.1/fnapi/?/location`
@@ -95,12 +95,12 @@ HIKES
    `git clone https://github.com/zherman0/footnotes-api.git`
 2. Using the /inc/cred.sample.txt file, make your own cred.txt file in the /inc directory and fill out the db information such as user, password, host, and db name. Make sure to set the dbhost to the appropriate value.
 3. Build dockerfiles<br/>
-   `docker build -f Dockerfile.db -t footnotes-database .`
-   `docker build -f Dockerfile.api -t footnotes-api .`
+   `docker build -f Dockerfile.db -t footnotes-database .`<br/>
+   `docker build -f Dockerfile.api -t footnotes-api .`<br/>
 4. Push images to repo<br/>
-   `docker tag footnotes-app quay.io/<username>/footnotes-app`
-   `docker push quay.io/<username>/footnotes-app`
-   `docker tag footnotes-api quay.io/<username>/ footnotes-api`
-   `docker push quay.io/<username>/footnotes-api`
+   `docker tag footnotes-app quay.io/<username>/footnotes-app`<br/>
+   `docker push quay.io/<username>/footnotes-app`<br/>
+   `docker tag footnotes-api quay.io/<username>/ footnotes-api`<br/>
+   `docker push quay.io/<username>/footnotes-api`<br/>
 
 5. From here, you have setup the images for the database and the API server. Please continue the steps in the instructions for [footnotes-react](zherman/footnotes-react).
