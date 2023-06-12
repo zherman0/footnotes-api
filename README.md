@@ -82,7 +82,6 @@ HIKES
 4. Set a network<br/>
    `docker network create fn-network`
 5. Deploy your images to containers<br/>
-   Note: You need a repo to push images to, I have quay.io as an example
    `docker run -d --name footnotes-db --network fn-network -e MYSQL_ROOT_PASSWORD=<your_password> footnotes-database`<br/>
    `docker run -d --name fn-api --network fn-network -p 80:80 footnotes-api`
 6. Test that the api and db are working together<br/>
@@ -99,6 +98,7 @@ HIKES
    `docker build -f Dockerfile.db -t footnotes-database .`<br/>
    `docker build -f Dockerfile.api -t footnotes-api .`<br/>
 4. Push images to repo<br/>
+   Note: You need a repo to push images to, the quay.io repo is used as merely an option<br/>
    `docker tag footnotes-app quay.io/<username>/footnotes-app`<br/>
    `docker push quay.io/<username>/footnotes-app`<br/>
    `docker tag footnotes-api quay.io/<username>/ footnotes-api`<br/>
