@@ -89,7 +89,7 @@ HIKES
 
 ### Openshift
 
-#### Note: For openshift deploment, after these steps, finish the install insturctions in [footnotes-react](zherman/footnotes-react).
+#### Note: For openshift deploment, after these steps, finish the install insturctions in [footnotes-react](http://github.com/zherman/footnotes-react).
 
 1. Clone this repo into your working directory<br/>
    `git clone https://github.com/zherman0/footnotes-api.git`
@@ -104,4 +104,4 @@ HIKES
    `docker tag footnotes-api quay.io/<username>/ footnotes-api`<br/>
    `docker push quay.io/<username>/footnotes-api`<br/>
 
-5. From here, you have setup the images for the database and the API server. Please continue the steps in the instructions for [footnotes-react](zherman/footnotes-react).
+5. From here, you have setup the images for the database and the API server. Please continue the steps in the instructions for [footnotes-react](http://github.com/zherman/footnotes-react).
