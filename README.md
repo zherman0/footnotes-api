@@ -48,12 +48,14 @@ HIKES
 >
 > - gets all the hikes in the table
 
-## Setup
+## Setup: [Traditional](#traditional) | [Containers](#containers) | [Openshift](#openshift)
+
+### Traditional
 
 1. Install some XAMP stack with apache, PHP 7.4.x, mariaDB
-2. On mariaDB, create a database called 'footnotes-db'. Deploy the /inc/footnotes.sql file on your 'footnotes-db' database.
+2. On mariaDB, deploy the /inc/footnotes.sql file to create the 'footnotes-db' database.
 3. Clone this repo into your working html directory such as /var/www/html/
-4. Using the /inc/cred.sample.txt file, make your own cred.txt file in the /inc directory and fill out the db information such as user, password, host, and db name.
+4. Using the /inc/cred.sample.txt file, make your own cred.txt file in the /inc directory and fill out the db information such as user, password, host, and db name. Make sure to set the dbhost to the appropriate value.
 5. With your server running, you should be able to type the following in your web browser and see some results:
 
    1. > localhost/fnapi/?/location
@@ -68,3 +70,37 @@ HIKES
       > AllowOverride All<br/>
       > Require all granted<br/>
       > <\/Directory>
+
+### Containers
+
+1. Clone this repo into your working directory<br/>
+   `git clone https://github.com/zherman0/footnotes-api.git`
+2. Using the /inc/cred.sample.txt file, make your own cred.txt file in the /inc directory and fill out the db information such as user, password, host, and db name. Make sure to set the dbhost to the appropriate value.
+3. Build dockerfiles<br/>
+   `docker build -f Dockerfile.db -t footnotes-database .`
+   `docker build -f Dockerfile.api -t footnotes-api .`
+4. Set a network<br/>
+   `docker network create fn-network`
+5. Deploy your images to containers<br/>
+   `docker run -d --name footnotes-db --network fn-network -e MYSQL_ROOT_PASSWORD=<your_password> footnotes-database`
+   `docker run -d --name fn-api --network fn-network -p 80:80 footnotes-api`
+6. Test that the api and db are working together<br/>
+   `(In browser) 127.0.0.1/fnapi/?/location`
+
+### Openshift
+
+#### Note: For openshift deploment, after these steps, finish the install insturctions in [footnotes-react](zherman/footnotes-react).
+
+1. Clone this repo into your working directory<br/>
+   `git clone https://github.com/zherman0/footnotes-api.git`
+2. Using the /inc/cred.sample.txt file, make your own cred.txt file in the /inc directory and fill out the db information such as user, password, host, and db name. Make sure to set the dbhost to the appropriate value.
+3. Build dockerfiles<br/>
+   `docker build -f Dockerfile.db -t footnotes-database .`
+   `docker build -f Dockerfile.api -t footnotes-api .`
+4. Push images to repo<br/>
+   `docker tag footnotes-app quay.io/<username>/footnotes-app`
+   `docker push quay.io/<username>/footnotes-app`
+   `docker tag footnotes-api quay.io/<username>/ footnotes-api`
+   `docker push quay.io/<username>/footnotes-api`
+
+5. From here, you have setup the images for the database and the API server. Please continue the steps in the instructions for [footnotes-react](zherman/footnotes-react).
